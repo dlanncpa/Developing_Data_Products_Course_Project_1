@@ -1,0 +1,34 @@
+---
+title: "Developing Data Products Course Project 1"
+author: "Dustin Lanning"
+date: "May 7, 2019"
+output: 
+  html_document: 
+    fig_caption: yes
+    keep_md: yes
+---
+
+##Overview
+
+The purpose of the project is to create a web page using R Markdown that features a map created with Leaflet.
+
+The webpage must be hosted on either GitHub Pages, RPubs, or NeoCities.
+
+The webpage must contain the date that the document was created and it must contain a map created with Leaflet.
+
+##Map
+
+Map of West Virginia "cities". Population data was obtained from http://worldpopulationreview.com/states/west-virginia-population/cities/.
+
+```{r}
+library(leaflet)
+wv_cities<-data.frame(name = c("Charleston", "Morgantown", "Wheeling", "Parkersburg", "Huntington", "Beckley", "Martinsburg"),
+pop = c(47293, 31950, 26688, 29689, 46811, 16372, 17828),
+lat = c(38.35, 39.64, 40.08, 39.26, 38.41, 37.79, 39.46),
+long = c(-81.63, -79.95, -80.7, -81.54, -82.43, -81.18, -77.98))
+
+wv_cities %>%
+    leaflet() %>%
+    addTiles() %>%
+    addCircles(weight = 1, radius = wv_cities$pop)
+```
